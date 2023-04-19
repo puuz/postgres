@@ -1,0 +1,48 @@
+explain what i essentially wanted to do that being discord gateway communication but it would of been to hard to demostrate
+because the connection would be established overtime and at random points because it's websocket based
+
+explain this was coded in javascript and used nodejs to run javascript in the backend rather than the frontend which is
+what it is usually used for, also explain what postgresql is and explain why i like it because it's a mixture of sql and nosql since it
+uses arrays and has built in functions to manipulate them
+
+talk about struggles
+learning how to handle buffers by encoding and decoding them using nodejs's buffer class...
+because I'm always used to recieving data in json format because libraries would handle the buffers for me and convert it to json so this time i had to do that
+understanding how postgre's communication worked because their documentation is not for beginners if you want to make your own driver in my opinion
+
+how the client makes the connection using the 3 way handshake and tcp socket connection
+the way postgres communicates wtih the client and what each letter means and how to format the messages
+explain how this is a very simple version of a database driver and you can add a lot of other things like...
+other password encryption support (sha256), more database type support, pool connections, query setup functions, promise functions
+
+explain how this could be used in real world programming and how putting values in would need to be modified with string manipulation so the query string would be accepted
+explain im showing super basic queries and postgres can get even cooler with constraint, joining tables, union clauses, indexing, sub queries, privileges, functions, and so much more...
+which can all be supported with this driver as long as it's formatted in the string correctly, the drivers job is simply taking your string query and sending it to postgres...
+to perform the actions you requested and receive the results based on the query you made in readable json format that has js dot notation
+
+also note that these queries are not all time efficient and are for demonstration purposes only
+
+explain the steps on what goes on in the code every time a connection is made, query is made, and disconnection
+
+also explain you can leave a connection open and continue to make queries so you don't have to wait every time you make a query...
+also you can leave multiple connections open at the same time and run pools so you can make 100 queries at the same time if your...
+program is ran multithreaded, 100 connections is just the default too so you can increase or decrease based on your needs
+
+CREATE TABLE test(id int, name varchar(32), guests varchar(32)[], hobbies text[], vip bool)
+SELECT * FROM test
+INSERT INTO test(id, name, guests, hobbies, vip) values(0, 'sam', ARRAY['ben', 'caden'], ARRAY['snowboarding', 'programming', 'gym'], true)
+SELECT * FROM test
+INSERT INTO test(id, name, guests, hobbies, vip) values(1, 'bob', ARRAY['liam', 'olivia'], ARRAY['running', 'soccer', 'art'], false)
+SELECT * FROM test
+INSERT INTO test(id, name, guests, hobbies, vip) values(2, 'joe', ARRAY['emma', 'noah'], ARRAY['swimming', 'sailing', 'music'], true)
+SELECT id, name, vip FROM test
+SELECT id, name, guests FROM test
+UPDATE test SET guests = array_append(guests, 'james'), vip = true WHERE id = 1
+SELECT * FROM test WHERE id = 1
+UPDATE test SET hobbies = array_remove(hobbies, 'sailing'), vip = false WHERE id = 2
+SELECT * FROM test WHERE id = 2
+DELETE FROM test WHERE name = 'sam'
+SELECT * FROM test WHERE id = 0
+SELECT * FROM test
+DELETE FROM test
+DROP TABLE test
