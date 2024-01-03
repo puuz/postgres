@@ -1,0 +1,57 @@
+1. Download lastest version of postgres
+	a. Visit https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
+	b. Click download icon on lastest version offered for your operating system
+	c. Use the defaults for each page during the setup except the following
+		1. Select components page unselect stack builder
+		2. Password page type whatever password and save it for later
+	d. Click finish after it's done installing
+
+2. Create a schema (skip this step if there is already one named "public")
+	a. Launch pgAdmin
+	b. Type in your password you used in step 1c2
+	c. Click the down arrow next to Servers
+	d. Right click Schemas
+	e. Hover over Create and click Schema...
+	f. Type a "public" in the "name" text box for your schema and save it for later
+	g. Click save
+	h. Close pgAdmin
+
+3. Download LTS (long term support) version of NodeJS
+	a. Visit https://nodejs.org/en
+	b. Click LTS version
+	c. Use the defaults for each page during the setup
+	d. Click finish after it's done installing
+
+4. Download Visual Studio Code (can open the code files without but can't open conf files without)
+	a. Visit https://code.visualstudio.com/download
+	b. Click your operating system
+	c. Use the defaults for each page during the setup
+	d. Click finish after it's done installing
+
+5. Download Sam Farris's code
+	a. Visit https://github.com/puuz/postgres
+	b. Click Code
+	c. Click Download ZIP
+	d. In your downloads right click the downloaded zip file and click extract all and click extract
+	e. Click into the extracted folder and drag the folder inside the extracted folder, into your downloads
+
+6. Setup the configuration file
+	a. In your downloads click the code's folder
+	b. Open constants.js in Visual Studio Code and enter your password inside the quotations of the property then save and close
+
+7. Double check postgres is using md5 hashing on Windows
+	a. Open file explorer and go into (Local Disk):\Program Files\PostgreSQL\14\data
+	b. In that folder open pg_hba conf file in Visual Studio Code and make sure every value under METHOD is md5 then save and close
+	c. In that folder open postgresql conf file in Visual Studio Code and make sure password_encryption is md5 then save and close
+	d. Restart computer
+
+You can now open index.js file in Visual Studio Code and the file is inside the code folder you downloaded in step 5.
+You can see there is already some code written which is for demonstration purposes, so to demonstrate.
+Open a Command Prompt and cd into the code folder.
+Then use the command "node ." and you'll see the results from the code's console log.
+To play around with the database more you'll need to know the SQL language under postgre syntax.
+To learn visit https://www.tutorialspoint.com/postgresql/index.htm
+Keep in mind the SQL is to be written in the quotations of the query variable value which is used in the query function.
+The only return value you should care about is when you are making a SELECT query.
+So make sure to store it in a variable and log it to the console like the demonstration code did.
+Last thing to keep in mind is the connect, query, and disconnect functions takes callbacks that are called when the function has finished so make sure to do it like the demonstration code did.
